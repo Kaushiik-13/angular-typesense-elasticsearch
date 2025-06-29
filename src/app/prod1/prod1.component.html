@@ -1,0 +1,62 @@
+<div class="container">
+  <aside class="sidebar">
+    <h3>Filter by Author</h3>
+<div *ngFor="let item of allAuthors">
+  <label>
+    <input
+      type="checkbox"
+      [checked]="filters.author_names.includes(item)"
+      (change)="onAuthorToggle(item, $event)"
+    />
+    {{ item }}
+  </label>
+</div>
+
+
+    <h3>Filter by Rating</h3>
+    <label>
+      <input
+        type="radio"
+        name="rating"
+        [(ngModel)]="filters.average_rating"
+        [value]="''"
+        (change)="applyRadioFilter('average_rating', '')"
+      />
+      All
+    </label>
+    <div *ngFor="let bucket of facets?.rating_facet?.buckets">
+      <label>
+        <input
+          type="radio"
+          name="rating"
+          [(ngModel)]="filters.average_rating"
+          [value]="bucket.from + '-' + bucket.to"
+          (change)="applyRadioFilter('average_rating', bucket.from + '-' + bucket.to)"
+        />
+        {{ bucket.from.toFixed(2) }} - {{ (bucket.to || 5.1).toFixed(2) }} ★ ({{ bucket.doc_count }})
+      </label>
+    </div>
+
+    <button (click)="clearFilters()">Clear All Filters</button>
+  </aside>
+
+  <main class="content">
+    <input [formControl]="searchControl" type="text" placeholder="Search author..." class="search-bar" />
+    <p class="result-count">{{ total }} product(s) found</p>
+
+    <div class="results">
+      <div *ngFor="let item of results" class="card">
+        <h4>{{ item.author_name }}</h4>
+        <p>Rating: {{ item.average_rating.toFixed(2) }} ★</p>
+        <p>Ratings Count: {{ item.ratings_count }}</p>
+        <p>Reviews: {{ item.text_reviews_count }}</p>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="page === 0">Prev</button>
+      <span>Page {{ page + 1 }}</span>
+      <button (click)="nextPage()" [disabled]="(page + 1) * size >= total">Next</button>
+    </div>
+  </main>
+</div>

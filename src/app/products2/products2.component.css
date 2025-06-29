@@ -1,0 +1,115 @@
+.products-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.product-card {
+  flex: 1 1 calc(33.333% - 1rem); /* 3 per row with spacing */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.05);
+  background-color: white;
+  min-width: 250px;
+  max-width: calc(33.333% - 1rem);
+}
+
+
+.product-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.product-card p {
+  margin: 0.25rem 0;
+  color: #555;
+}
+.pagination {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pagination span {
+  font-weight: 500;
+}
+.search-box {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.layout-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+/* Sidebar */
+.filter-sidebar {
+  width: max-content;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  height: fit-content;
+}
+
+.filter-group {
+  margin-bottom: 1rem;
+}
+
+.filter-group h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* Main content */
+.products-content {
+  flex: 1;
+}
+.clear-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.clear-btn:hover {
+  background-color: #d32f2f;
+}
+
+.count {
+  color: #999;
+  font-size: 0.9rem;
+  margin-left: 4px;
+}

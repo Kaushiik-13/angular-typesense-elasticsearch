@@ -1,0 +1,16 @@
+<div>
+  <label for="genre">Filter by Genre:</label>
+  <select id="genre" [(ngModel)]="selectedGenre" (change)="onGenreChange()">
+    <option value="">All</option>
+    <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+  </select>
+</div>
+
+<div *ngFor="let author of authors">
+  <h3>{{ author.name }}</h3>
+  <ul>
+    <li *ngFor="let book of author.books">
+      <strong>{{ book.title }}</strong> ({{ book.genre }})
+    </li>
+  </ul>
+</div>

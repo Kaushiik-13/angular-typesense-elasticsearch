@@ -1,0 +1,66 @@
+<div class="layout-container">
+  <!-- Filter Sidebar -->
+  <div class="filter-sidebar">
+    <h3>Filters</h3>
+    <button (click)="clearFilters()" class="clear-btn">Clear All</button>
+
+    <!-- Brand -->
+    <div class="filter-group">
+      <h4>Brand</h4>
+      <label *ngFor="let b of brandOptions">
+        <input type="checkbox" [checked]="isChecked(b.name, selectedBrands)"
+               (change)="toggleFilter('brand', b.name, selectedBrands)">
+        {{ b.name }} <span class="count">({{ b.count }})</span>
+      </label>
+    </div>
+
+    <!-- Type -->
+    <div class="filter-group">
+      <h4>Type</h4>
+      <label *ngFor="let t of typeOptions">
+        <input type="checkbox" [checked]="isChecked(t.name, selectedTypes)"
+               (change)="toggleFilter('type', t.name, selectedTypes)">
+        {{ t.name }} <span class="count">({{ t.count }})</span>
+      </label>
+    </div>
+
+    <!-- Label -->
+    <div class="filter-group">
+      <h4>Label</h4>
+      <label *ngFor="let l of labelOptions">
+        <input type="checkbox" [checked]="isChecked(l.name, selectedLabels)"
+               (change)="toggleFilter('label', l.name, selectedLabels)">
+        {{ l.name }} <span class="count">({{ l.count }})</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Product Listing -->
+  <div class="products-content">
+    <h2>Product Listings</h2>
+
+    <input type="text" [(ngModel)]="searchTerm"
+           (input)="onSearchChange()"
+           placeholder="Search by title, brand, MPN..." class="search-box"/>
+
+    <p *ngIf="totalFound > 0">Total Products Found: {{ totalFound }}</p>
+    <div *ngIf="products.length === 0">No products found.</div>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of products">
+      <h3>{{ product.Title }}</h3>
+      <p><strong>Brand:</strong> {{ product.Brand }}</p>
+      <p><strong>MPN:</strong> {{ product.MPN }}</p>
+      <p><strong>Type:</strong> {{ product.ProductTypeName }}</p>
+      <p><strong>Price:</strong> {{ product.ListPrice }}</p>
+      <p><strong>Label:</strong> {{ product.Label }}</p>
+    </div>
+  </div>
+
+
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+</div>

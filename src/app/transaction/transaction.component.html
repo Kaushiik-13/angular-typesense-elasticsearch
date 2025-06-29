@@ -1,0 +1,65 @@
+<div class="search-container">
+  <!-- Search Input -->
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (input)="onSearchChange()"
+    placeholder="Search by location..."
+    class="input"
+  />
+
+  <!-- ID Filter -->
+  <input
+    type="text"
+    [(ngModel)]="selectedID"
+    (input)="onFilterChange()"
+    placeholder="Filter by ID"
+    class="input"
+  />
+
+  <!-- Location Filter -->
+  <select [(ngModel)]="selectedLocation" (change)="onFilterChange()" class="select">
+    <option value="">All Locations</option>
+    <option *ngFor="let loc of locationOptions" [value]="loc">{{ loc }}</option>
+  </select>
+
+  <!-- Domain Filter -->
+  <select [(ngModel)]="selectedDomain" (change)="onFilterChange()" class="select" >
+    <option value="">All Domains</option>
+    <option *ngFor="let dom of domainOptions" [value]="dom">{{ dom }}</option>
+  </select>
+</div>
+
+<!-- Transaction Table -->
+<div class="table-container">
+  <p>Total Transactions Found: {{ totalCount }}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Domain</th>
+        <th>Transactions</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of transactions">
+        <td>{{ t.id }}</td>
+        <td>{{ t.date }}</td>
+        <td>{{ t.location }}</td>
+        <td>{{ t.domain }}</td>
+        <td>{{ t.transaction_count }}</td>
+        <td>{{ t.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Pagination -->
+<div class="pagination">
+  <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+</div>

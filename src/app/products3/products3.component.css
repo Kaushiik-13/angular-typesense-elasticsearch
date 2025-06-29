@@ -1,0 +1,18 @@
+/* products3.component.css */
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+select {
+  margin-bottom: 20px;
+  padding: 6px;
+}
+
+.author-block {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,76 @@
+<div class="container">
+  <!-- Sidebar Filters -->
+  <aside class="filters">
+    <h3>Filters</h3>
+
+    <!-- Search -->
+    <div class="filter-group">
+      <label>Search</label>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+        placeholder="Search products..."
+      />
+    </div>
+
+    <!-- Brand Filter -->
+    <div class="filter-group">
+      <label>Brand</label>
+      <div *ngFor="let brand of brandOptions">
+        <input
+          type="radio"
+          name="brand"
+          [value]="brand"
+          [(ngModel)]="selectedBrand"
+          (change)="onFilterChange()"
+        /> {{ brand }}
+      </div>
+      <div>
+        <input
+          type="radio"
+          name="brand"
+          value=""
+          [(ngModel)]="selectedBrand"
+          (change)="onFilterChange()"
+        /> All
+      </div>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="filter-group">
+      <label>Category</label>
+      <div *ngFor="let category of categoryOptions">
+        <input
+          type="checkbox"
+          [value]="category"
+          (change)="toggleCategory(category)"
+          [checked]="selectedCategory === category"
+        />
+        {{ category }}
+      </div>
+    </div>
+  </aside>
+
+  <!-- Product List -->
+  <main class="products">
+    <div class="summary">
+      <p>Showing {{ totalCount }} products</p>
+    </div>
+
+    <div *ngFor="let product of products" class="product-card">
+      <h4>{{ product.title }}</h4>
+      <p><strong>Brand:</strong> {{ product.brand }}</p>
+      <p><strong>Price:</strong> ₹{{ product.selling_price || product.actual_price }}</p>
+      <p><strong>Category:</strong> {{ product.category }}</p>
+      <p *ngIf="product.average_rating"><strong>Rating:</strong> {{ product.average_rating }}</p>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </main>
+</div>

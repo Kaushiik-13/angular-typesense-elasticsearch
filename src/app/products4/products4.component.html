@@ -1,0 +1,16 @@
+<div class="filter-container">
+  <label for="genre">Filter by Genre:</label>
+  <select id="genre" [(ngModel)]="selectedGenre" (change)="applyFilter()">
+    <option value="">All</option>
+    <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+  </select>
+</div>
+
+<div class="author-card" *ngFor="let author of filteredAuthors">
+  <h2>{{ author.name }}</h2>
+  <ul>
+    <li *ngFor="let book of author.books">
+      <strong>{{ book.title }}</strong> - {{ book.genre }}
+    </li>
+  </ul>
+</div>

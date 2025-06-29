@@ -1,0 +1,29 @@
+<div class="search-container">
+  <h2>Movie Search</h2>
+
+  <div class="filters">
+    <input
+      type="text"
+      [(ngModel)]="query"
+      (ngModelChange)="search()"
+      placeholder="Search by movie name or description"
+      class="input"
+    />
+
+    <select [(ngModel)]="genre" (change)="search()" class="select">
+      <option value="">All Genres</option>
+      <option *ngFor="let g of genres" [value]="g">{{ g }}</option>
+    </select>
+  </div>
+
+  <div class="results">
+    <p *ngIf="results.length > 0">Showing {{ results.length }} results.</p>
+    <p *ngIf="results.length === 0">No results found.</p>
+
+    <div *ngFor="let movie of results" class="movie-card">
+      <h3>{{ movie.movie_name }}</h3>
+      <p><strong>Genre:</strong> {{ movie.genre }}</p>
+      <p><strong>Description:</strong> {{ movie.description }}</p>
+    </div>
+  </div>
+</div>
