@@ -1,0 +1,67 @@
+<div class="container mt-4">
+    <h3>Search Categories + Products (Joins)</h3>
+
+    <!-- Filter Controls -->
+    <form class="d-flex flex-wrap gap-2 mb-3" (ngSubmit)="searchProducts()">
+        <select [(ngModel)]="category" name="category" class="form-select w-auto">
+            <option value="">Select Category</option>
+            <option *ngFor="let cat of cats" [value]="cat">{{ cat }}</option>
+        </select>
+
+
+        <select [(ngModel)]="stock" name="stock" class="form-select w-auto">
+            <option value="">Any Stock</option>
+            <option value="true">In Stock</option>
+            <option value="false">Out of Stock</option>
+        </select>
+
+        <input type="number" [(ngModel)]="minRating" name="minRating" placeholder="Min Rating"
+            class="form-control w-auto" />
+
+        <button type="submit" class="btn btn-primary" (click)="applyFilters()">Apply</button>
+        <button type="button" class="btn btn-secondary" (click)="clearFilters()">Clear</button>
+    </form>
+
+    <!-- Results Count -->
+    <div *ngIf="ifFilter==false">
+        <p>Found {{ foundCount }} products</p>
+
+        <!-- Products Grid -->
+        <div class="row">
+            <div class="col-md-6 mb-3" *ngFor="let d of data">
+                <div class="card p-3 h-100 bg-light">
+                    <h5 class="fw-bold">{{ d.products.title }}</h5>
+                    <p>Price: ₹{{ d.products.price }}</p>
+                    <p>Rating: {{d.products.rating }}</p>
+                    <p>Stock: {{ d.products.in_stock ? 'Yes' : 'No' }}</p>
+                    <p>Category: {{ d.name }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="ifFilter==true">
+        <p>Found {{ foundCount }} products</p>
+
+        <!-- Products Grid -->
+        <div class="row">
+            <div class="col-md-6 mb-3" *ngFor="let product of products">
+                <div class="card p-3 h-100 bg-light">
+                    <h5 class="fw-bold">{{ product.title }}</h5>
+                    <p>Price: ₹{{ product.price }}</p>
+                    <p>Rating: {{product.rating }}</p>
+                    <p>Stock: {{ product.in_stock ? 'Yes' : 'No' }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Pagination Controls -->
+    <div class="mt-4 text-center" *ngIf="totalPages > 1">
+        <button class="btn btn-outline-secondary me-2" (click)="prevPage()"
+            [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button class="btn btn-outline-secondary ms-2" (click)="nextPage()"
+            [disabled]="currentPage === totalPages">Next</button>
+    </div>
+</div>
